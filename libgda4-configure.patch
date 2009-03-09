@@ -1,0 +1,75 @@
+diff -urN libgda-3.99.12/configure.in libgda-3.99.12.new/configure.in
+--- libgda-3.99.12/configure.in	2009-02-18 21:29:06.000000000 +0100
++++ libgda-3.99.12.new/configure.in	2009-03-08 15:50:56.000000000 +0100
+@@ -416,7 +416,7 @@
+ 	else
+ 		AC_DEFINE(HAVE_ODBC, 1, [Have ODBC])
+ 		ODBC_CFLAGS="-I${odbcdir}/include"
+-		ODBC_LIBS="-L${odbcdir}/lib ${odbclib}"
++		ODBC_LIBS="${odbclib}"
+ 	fi
+ fi
+ 
+@@ -648,7 +648,7 @@
+ 		AC_MSG_WARN(tds backend not used)
+ 	else
+ 		AC_MSG_CHECKING(for freetds version)
+-		freetdsvercheck="`grep \"^#define \(VERSION_NO \|TDS_VERSION_NO \)\" $freetds_incdir/tdsver.h|sed 's|^.*".*v\(.*\)"|\1|'`"
++		freetdsvercheck=$(grep \"^#define \(VERSION_NO \|TDS_VERSION_NO \)\" $freetds_incdir/tdsver.h|sed 's|^.*".*v\(.*\)"|\1|')
+ 		if test "x$freetdsvercheck" = "x"
+ 		then
+ 			AC_MSG_WARN(freetds version check failed - backend not used)
+@@ -657,7 +657,7 @@
+ 		else
+ 			AC_MSG_RESULT($freetdsvercheck)
+ 			FREETDS_CFLAGS="-I${freetds_incdir}"
+-			FREETDS_LIBS="-L${freetdsdir}/lib -ltds"
++			FREETDS_LIBS="-ltds"
+ 			AC_DEFINE(HAVE_FREETDS, 1, [Have freetds])
+ 
+ 			freetds_version_major="`echo $freetdsvercheck|sed 's:^\([[^.]]*\).*:\1:'`"
+@@ -789,13 +789,11 @@
+ 	else
+ 		SYBASE_DIR=${sybasedir}
+ 		SYBASE_CFLAGS="-I${sybasedir}/include"
+-		SYBASE_LIBS="-lnsl -ldl -lm"
+ 		AC_MSG_CHECKING(for Sybase host system type)
+ 		AC_MSG_RESULT($host)
+ 		case "$host" in
+-		*linux*) sybase_ctlibs="-L${sybasedir}/lib -lct -lcs -lsybtcl -lcomn -lintl"
+-			sybase_blklibs="-L${sybasedir}/lib -lblk ${sybase_ctlibs}"
+-			SYBASE_LIBS="${SYBASE_LIBS} ${sybase_blklibs}"
++		*linux*)
++			SYBASE_LIBS="-lct"
+ 			AC_CHECK_LIB(ct,tdsdump_on,[
+ 			AC_MSG_WARN(linking against freetds libct)
+ 			AC_DEFINE(HAVE_SYBASE, 1, [Have Sybase])
+@@ -992,7 +990,7 @@
+ 	mdbdir=""
+ 	for d in $dir /usr /usr/local /opt/gnome
+ 	do
+-		if test -f $d/include/mdbtools.h -a -f $d/$lib/libmdb$linklibext -o -f $d/include/mdbtools.h -a -f $d/$lib/libmdb.a
++		if test -f $d/include/mdb/mdbtools.h -a -f $d/$lib/libmdb$linklibext -o -f $d/include/mdb/mdbtools.h -a -f $d/$lib/libmdb.a
+ 		then
+ 			AC_MSG_RESULT(found MDB Tools in $d)
+ 			mdbdir=$d
+@@ -1003,8 +1001,8 @@
+ 	then
+ 		AC_MSG_WARN(MDB backend not used)
+ 	else
+-		MDB_CFLAGS=-I${mdbdir}/include
+-		MDB_LIBS="-L${mdbdir}/lib -lmdb"
++		MDB_CFLAGS=-I${mdbdir}/include/mdb
++		MDB_LIBS="-lmdb"
+ 		AC_DEFINE(HAVE_MDB, 1, [Have MDB])
+ 
+ 		save_CFLAGS="$CFLAGS"
+@@ -1083,7 +1081,7 @@
+ 		AC_MSG_WARN(LDAP backend not used)
+ 	else
+ 		LDAP_CFLAGS="-I${ldapdir}/include"
+-		LDAP_LIBS="-L${ldapdir}/lib -lldap -llber"
++		LDAP_LIBS="-lldap -llber"
+ 		AC_DEFINE(HAVE_LDAP, 1, [Have LDAP])
+ 	fi
+ fi
