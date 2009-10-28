@@ -23,6 +23,7 @@ Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.0/libgda-%{version}.tar.bz2
 # Source0-md5:	cd79f6542cdd9477017b76b5f81c776f
 Patch0:		%{name}-configure.patch
+Patch1:		install.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
@@ -192,6 +193,7 @@ Pakiet dostarczający dane z SQLite dla GDA.
 %prep
 %setup -q -n libgda-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %if %{with jdbc}
