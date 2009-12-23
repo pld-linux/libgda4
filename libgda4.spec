@@ -198,6 +198,7 @@ Pakiet dostarczający dane z SQLite dla GDA.
 %if %{with jdbc}
 export JAVA_HOME="%{java_home}"
 %endif
+%{__gtkdocize}
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
