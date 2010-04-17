@@ -34,7 +34,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
 BuildRequires:	gtk-doc >= 1.6
 BuildRequires:	intltool >= 0.40.0
-%{?with_jdbc:BuildRequires:	java-sun}
+%{?with_jdbc:BuildRequires:	jdk}
 BuildRequires:	json-glib-devel
 BuildRequires:	libsoup-devel >= 2.24.0
 BuildRequires:	libtool
