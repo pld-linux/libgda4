@@ -16,12 +16,12 @@
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
-Version:	4.0.5
+Version:	4.0.8
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.0/libgda-%{version}.tar.bz2
-# Source0-md5:	c61dbbc85479d3de4371ee16da922124
+# Source0-md5:	3e4a55f370805cda9ac415211da4aacc
 Patch0:		%{name}-configure.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
@@ -215,7 +215,7 @@ export JAVA_HOME="%{java_home}"
 	--with%{!?with_pgsql:out}-postgres \
 	--with%{!?with_sqlite:out}-sqlite \
 	--without-oracle
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -252,6 +252,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libgda-report-4.0.so.4
 %attr(755,root,root) %{_libdir}/libgda-xslt-4.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgda-xslt-4.0.so.4
+%{_libdir}/girepository-1.0/Gda-4.0.typelib
 %dir %{_libdir}/%{_libgdadir}
 %dir %{_providersdir}
 %{_datadir}/libgda-4.0
@@ -269,6 +270,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-4.0.la
 %{_libdir}/libgda-report-4.0.la
 %{_libdir}/libgda-xslt-4.0.la
+%{_datadir}/gir-1.0/Gda-4.0.gir
 %{_includedir}/libgda-4.0
 %{_pkgconfigdir}/libgda-4.0.pc
 %{_pkgconfigdir}/libgda-bdb-4.0.pc
