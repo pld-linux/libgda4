@@ -32,6 +32,7 @@ BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
+BuildRequires:	glibc-misc
 BuildRequires:	gtk-doc >= 1.6
 BuildRequires:	intltool >= 0.40.0
 %{?with_jdbc:BuildRequires:	jdk}
