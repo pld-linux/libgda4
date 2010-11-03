@@ -7,7 +7,6 @@
 %bcond_without	mdb		# build without MDB plugin
 %bcond_without	mysql		# build without MySQL plugin
 %bcond_without	pgsql		# build without PostgreSQL plugin
-%bcond_without	sqlite		# build without sqlite plugin
 #
 %ifnarch i586 i686 pentium3 pentium4 athlon %{x8664}
 %undefine	with_jdbc
@@ -16,12 +15,12 @@
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
-Version:	4.0.8
-Release:	2
+Version:	4.2.0
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.0/libgda-%{version}.tar.bz2
-# Source0-md5:	3e4a55f370805cda9ac415211da4aacc
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
+# Source0-md5:	4b00c2b61430b2a0ea00e0332d1e8ef4
 Patch0:		%{name}-configure.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
@@ -33,22 +32,33 @@ BuildRequires:	flex
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
 BuildRequires:	glibc-misc
+BuildRequires:	gnome-doc-utils >= 0.9.0
+BuildRequires:	gobject-introspection-devel >= 0.6.5
+BuildRequires:	goocanvas-devel
+BuildRequires:	graphviz-devel
+BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtk-doc >= 1.6
+BuildRequires:	gtksourceview2-devel
 BuildRequires:	intltool >= 0.40.0
+BuildRequires:	iso-codes
 %{?with_jdbc:BuildRequires:	jdk}
 BuildRequires:	json-glib-devel
+BuildRequires:	libgcrypt-devel
+BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libsoup-devel >= 2.24.0
 BuildRequires:	libtool
+BuildRequires:	libunique-devel
 BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	libxslt-devel >= 1.1.17
-%{?with_mdb:BuildRequires:	mdbtools-devel >= 0.6}
+%{?with_mdb:BuildRequires:	mdbtools-devel >= 0.6-0.pre1.7}
 %{?with_mysql:BuildRequires:	mysql-devel}
+BuildRequires:	openssl-devel
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 0.18
 %{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	readline-devel >= 5.0
-BuildRequires:	rpmbuild(macros) >= 1.213
-%{?with_sqlite:BuildRequires:	sqlite3-devel >= 3.6.0}
+BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	sqlite3-devel >= 3.6.11
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libgdadir	libgda-4.0
@@ -105,6 +115,43 @@ GNU Data Access static libraries.
 
 %description static -l pl.UTF-8
 Statyczne biblioteki GNU Data Access.
+
+%package ui
+Summary:	GNU Data Access UI library
+Summary(pl.UTF-8):	Biblioteka GNU Data Access UI
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description ui
+GNU Data Access UI library.
+
+%description ui -l pl.UTF-8
+Biblioteka GNU Data Access UI.
+
+%package ui-devel
+Summary:	Development files for GNU Data Access UI library
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki GNU Data Access UI
+Group:		Development/Libraries
+Requires:	%{name}-ui = %{version}-%{release}
+Requires:	gtk+2-devel >= 2:2.12.0
+
+%description ui-devel
+Development files for GNU Data Access UI library.
+
+%description ui-devel -l pl.UTF-8
+Pliki programistyczne biblioteki GNU Data Access UI.
+
+%package ui-static
+Summary:	GNU Data Access UI static library
+Summary(pl.UTF-8):	Statyczna biblioteka GNU Data Access UI
+Group:		Development/Libraries
+Requires:	%{name}-ui-devel = %{version}-%{release}
+
+%description ui-static
+GNU Data Access UI static library.
+
+%description ui-static -l pl.UTF-8
+Statyczna biblioteka GNU Data Access UI.
 
 %package apidocs
 Summary:	GNU Data Access API documentation
@@ -179,6 +226,18 @@ This package contains the GDA PostgreSQL provider.
 %description provider-postgres -l pl.UTF-8
 Pakiet dostarczający dane z PostgreSQL dla GDA.
 
+%package provider-sqlcipher
+Summary:	GDA SQLCipher provider
+Summary(pl.UTF-8):	Źródło danych SQLCipher dla GDA
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description provider-sqlcipher
+This package contains the GDA SQLCipher provider.
+
+%description provider-sqlcipher -l pl.UTF-8
+Pakiet dostarczający dane z SQLCipher dla GDA.
+
 %package provider-sqlite
 Summary:	GDA SQLite provider
 Summary(pl.UTF-8):	Źródło danych SQLite dla GDA
@@ -191,21 +250,51 @@ This package contains the GDA SQLite provider.
 %description provider-sqlite -l pl.UTF-8
 Pakiet dostarczający dane z SQLite dla GDA.
 
+%package provider-web
+Summary:	GDA Web provider
+Summary(pl.UTF-8):	Źródło danych Web dla GDA
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description provider-web
+This package contains the GDA Web provider.
+
+%description provider-web -l pl.UTF-8
+Pakiet dostarczający dane z Web dla GDA.
+
+%package tools
+Summary:	Graphical tools for GDA
+Summary(pl.UTF-8):	Narzędzia graficzne dla GDA
+Group:		X11/Applications
+Requires(post,postun):	gtk+2
+Requires:	%{name}-ui = %{version}-%{release}
+Requires:	hicolor-icon-theme
+
+%description tools
+Graphical tools for GDA.
+
+%description tools -l pl.UTF-8
+Narzędzia graficzne dla GDA.
+
 %prep
 %setup -q -n libgda-%{version}
 %patch0 -p1
 
 %build
+cp -f %{_aclocaldir}/introspection.m4 m4/introspection.m4
 %if %{with jdbc}
 export JAVA_HOME="%{java_home}"
 %endif
 %{__gtkdocize}
 %{__intltoolize}
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
 %configure \
+	--enable-system-sqlite \
+	--disable-silent-rules \
+	--disable-introspection \
 	%{!?with_static_libs:--disable-static} \
 	--%{?with_apidocs:en}%{!?with_apidocs:dis}able-gtk-doc \
 	--with-html-dir=%{_gtkdocdir} \
@@ -214,7 +303,6 @@ export JAVA_HOME="%{java_home}"
 	--with%{!?with_mdb:out}-mdb \
 	--with%{!?with_mysql:out}-mysql \
 	--with%{!?with_pgsql:out}-postgres \
-	--with%{!?with_sqlite:out}-sqlite \
 	--without-oracle
 %{__make} -j1
 
@@ -226,16 +314,24 @@ rm -rf $RPM_BUILD_ROOT
 
 # modules dlopened by *.so through libgmodule
 %{__rm} $RPM_BUILD_ROOT%{_providersdir}/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{_libgdadir}/plugins/*.{a,la}
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
 %find_lang libgda-4.0
+%find_lang gda-browser --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
+
+%post tools
+%update_icon_cache hicolor
+
+%postun tools
+%update_icon_cache hicolor
 
 %files -f libgda-4.0.lang
 %defattr(644,root,root,755)
@@ -253,10 +349,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libgda-report-4.0.so.4
 %attr(755,root,root) %{_libdir}/libgda-xslt-4.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgda-xslt-4.0.so.4
-%{_libdir}/girepository-1.0/Gda-4.0.typelib
+%attr(755,root,root) %{_bindir}/gda_trml2*
+#%{_libdir}/girepository-1.0/Gda-4.0.typelib
 %dir %{_libdir}/%{_libgdadir}
 %dir %{_providersdir}
-%{_datadir}/libgda-4.0
+%dir %{_datadir}/libgda-4.0
+%{_datadir}/libgda-4.0/demo
+%{_datadir}/libgda-4.0/dtd
+%{_datadir}/libgda-4.0/icons
+%{_datadir}/libgda-4.0/pixmaps
+%{_datadir}/libgda-4.0/import_encodings.xml
+%{_datadir}/libgda-4.0/information_schema.xml
+%{_datadir}/libgda-4.0/language-specs
+%{_datadir}/libgda-4.0/server_operation.glade
 %dir %{_sysconfdir}/libgda-4.0
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/libgda-4.0/config
 %{_sysconfdir}/libgda-4.0/sales_test.db
@@ -271,7 +376,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-4.0.la
 %{_libdir}/libgda-report-4.0.la
 %{_libdir}/libgda-xslt-4.0.la
-%{_datadir}/gir-1.0/Gda-4.0.gir
+#%{_datadir}/gir-1.0/Gda-4.0.gir
 %{_includedir}/libgda-4.0
 %{_pkgconfigdir}/libgda-4.0.pc
 %{_pkgconfigdir}/libgda-bdb-4.0.pc
@@ -280,8 +385,10 @@ rm -rf $RPM_BUILD_ROOT
 %{?with_mysql:%{_pkgconfigdir}/libgda-mysql-4.0.pc}
 %{?with_pgsql:%{_pkgconfigdir}/libgda-postgres-4.0.pc}
 %{_pkgconfigdir}/libgda-report-4.0.pc
-%{?with_sqlite:%{_pkgconfigdir}/libgda-sqlite-4.0.pc}
+%{_pkgconfigdir}/libgda-sqlcipher-4.0.pc
+%{_pkgconfigdir}/libgda-sqlite-4.0.pc
 %{_pkgconfigdir}/libgda-xslt-4.0.pc
+%{_pkgconfigdir}/libgda-web-4.0.pc
 
 %if %{with static_libs}
 %files static
@@ -291,15 +398,38 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-xslt-4.0.a
 %endif
 
+%files ui
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgda-ui-4.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgda-ui-4.0.so.4
+%attr(755,root,root) %{_libdir}/%{_libgdadir}/plugins/libgda-ui-plugins.so
+%dir %{_libdir}/%{_libgdadir}/plugins
+%{_libdir}/%{_libgdadir}/plugins/gdaui-*.xml
+%{_datadir}/libgda-4.0/ui
+
+%files ui-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgda-ui-4.0.so
+%{_libdir}/libgda-ui-4.0.la
+%{_pkgconfigdir}/libgda-ui-4.0.pc
+
+%if %{with static_libs}
+%files ui-static
+%defattr(644,root,root,755)
+%{_libdir}/libgda-ui-4.0.a
+%endif
+
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
+%{_gtkdocdir}/gda-browser
 %{_gtkdocdir}/libgda-4.0
 %endif
 
 %files provider-db
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_providersdir}/libgda-bdb.so
+%{_datadir}/libgda-4.0/bdb_specs_*
 
 %if %{with jdbc}
 %files provider-jdbc
@@ -307,28 +437,53 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gda-list-jdbc-providers-4.0
 %attr(755,root,root) %{_providersdir}/libgda-jdbc.so
 %{_providersdir}/gdaprovider-4.0.jar
+%{_datadir}/libgda-4.0/jdbc_specs_*
 %endif
 
 %if %{with mdb}
 %files provider-mdb
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_providersdir}/libgda-mdb.so
+%{_datadir}/libgda-4.0/mdb_specs_*
 %endif
 
 %if %{with mysql}
 %files provider-mysql
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_providersdir}/libgda-mysql.so
+%{_datadir}/libgda-4.0/mysql_specs_*
 %endif
 
 %if %{with pgsql}
 %files provider-postgres
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_providersdir}/libgda-postgres.so
+%{_datadir}/libgda-4.0/postgres_specs_*
 %endif
 
-%if %{with sqlite}
+%files provider-sqlcipher
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_providersdir}/libgda-sqlcipher.so
+%{_datadir}/libgda-4.0/sqlcipher_specs_*
+
 %files provider-sqlite
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_providersdir}/libgda-sqlite.so
-%endif
+%{_datadir}/libgda-4.0/sqlite_specs_*
+
+%files provider-web
+%defattr(644,root,root,755)
+%doc providers/web/README
+%attr(755,root,root) %{_providersdir}/libgda-web.so
+%{_datadir}/libgda-4.0/php
+%{_datadir}/libgda-4.0/web
+%{_datadir}/libgda-4.0/web_*
+
+%files tools -f gda-browser.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gda-browser-4.0
+%attr(755,root,root) %{_bindir}/gda-control-center-4.0
+%{_desktopdir}/gda-browser-4.0.desktop
+%{_desktopdir}/gda-control-center-4.0.desktop
+%{_pixmapsdir}/*.png
+%{_iconsdir}/hicolor/*/*/*.png
