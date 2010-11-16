@@ -16,7 +16,7 @@ Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
 Version:	4.2.1
-Release:	1
+Release:	2
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
@@ -299,6 +299,7 @@ export JAVA_HOME="%{java_home}"
 	--%{?with_apidocs:en}%{!?with_apidocs:dis}able-gtk-doc \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-bdb=/usr \
+	--with-bdb-libdir-name=%{_lib} \
 	--with%{!?with_jdbc:out}-java \
 	--with%{!?with_mdb:out}-mdb \
 	--with%{!?with_mysql:out}-mysql \
