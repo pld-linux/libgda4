@@ -16,7 +16,7 @@ Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
 Version:	4.2.3
-Release:	1
+Release:	2
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
@@ -266,9 +266,9 @@ Pakiet dostarczający dane z Web dla GDA.
 Summary:	Graphical tools for GDA
 Summary(pl.UTF-8):	Narzędzia graficzne dla GDA
 Group:		X11/Applications
-Requires(post,postun):	gtk+2
+Requires(post,postun):	gtk-update-icon-cache
+Requires(post,postun):	hicolor-icon-theme
 Requires:	%{name}-ui = %{version}-%{release}
-Requires:	hicolor-icon-theme
 
 %description tools
 Graphical tools for GDA.
