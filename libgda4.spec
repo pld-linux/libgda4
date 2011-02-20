@@ -15,12 +15,12 @@
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
-Version:	4.2.3
-Release:	2
+Version:	4.2.4
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
-# Source0-md5:	79560f4bd529ec1f6e5adaa555ed04b2
+# Source0-md5:	dbff943b8c7c14fc22e0cb85cc8216e6
 Patch0:		%{name}-configure.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
@@ -57,7 +57,7 @@ BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 0.18
 %{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	readline-devel >= 5.0
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	sqlite3-devel >= 3.6.11
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -266,8 +266,8 @@ Pakiet dostarczający dane z Web dla GDA.
 Summary:	Graphical tools for GDA
 Summary(pl.UTF-8):	Narzędzia graficzne dla GDA
 Group:		X11/Applications
-Requires(post,postun):	gtk-update-icon-cache
-Requires(post,postun):	hicolor-icon-theme
+Requires:	gtk-update-icon-cache
+Requires:	hicolor-icon-theme
 Requires:	%{name}-ui = %{version}-%{release}
 
 %description tools
