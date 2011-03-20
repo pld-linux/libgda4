@@ -54,7 +54,7 @@ BuildRequires:	libxslt-devel >= 1.1.17
 %{?with_mysql:BuildRequires:	mysql-devel}
 BuildRequires:	openssl-devel
 BuildRequires:	perl-base
-BuildRequires:	pkgconfig >= 0.18
+BuildRequires:	pkgconfig >= 1:0.18
 %{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	readline-devel >= 5.0
 BuildRequires:	rpmbuild(macros) >= 1.601
@@ -292,10 +292,9 @@ export JAVA_HOME="%{java_home}"
 %{__autoconf}
 %{__automake}
 %configure \
-	--enable-system-sqlite \
 	--disable-silent-rules \
-	--disable-introspection \
 	%{!?with_static_libs:--disable-static} \
+	--enable-system-sqlite \
 	--%{?with_apidocs:en}%{!?with_apidocs:dis}able-gtk-doc \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-bdb=/usr \
@@ -305,6 +304,7 @@ export JAVA_HOME="%{java_home}"
 	--with%{!?with_mysql:out}-mysql \
 	--with%{!?with_pgsql:out}-postgres \
 	--without-oracle
+
 %{__make} -j1
 
 %install
@@ -351,7 +351,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgda-xslt-4.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgda-xslt-4.0.so.4
 %attr(755,root,root) %{_bindir}/gda_trml2*
-#%{_libdir}/girepository-1.0/Gda-4.0.typelib
+%{_libdir}/girepository-1.0/Gda-4.0.typelib
 %dir %{_libdir}/%{_libgdadir}
 %dir %{_providersdir}
 %dir %{_datadir}/libgda-4.0
@@ -377,7 +377,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-4.0.la
 %{_libdir}/libgda-report-4.0.la
 %{_libdir}/libgda-xslt-4.0.la
-#%{_datadir}/gir-1.0/Gda-4.0.gir
+%{_datadir}/gir-1.0/Gda-4.0.gir
 %{_includedir}/libgda-4.0
 %{_pkgconfigdir}/libgda-4.0.pc
 %{_pkgconfigdir}/libgda-bdb-4.0.pc
@@ -406,12 +406,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{_libgdadir}/plugins/libgda-ui-plugins.so
 %dir %{_libdir}/%{_libgdadir}/plugins
 %{_libdir}/%{_libgdadir}/plugins/gdaui-*.xml
+%{_libdir}/girepository-1.0/Gdaui-4.0.typelib
 %{_datadir}/libgda-4.0/ui
 
 %files ui-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgda-ui-4.0.so
 %{_libdir}/libgda-ui-4.0.la
+%{_datadir}/gir-1.0/Gdaui-4.0.gir
 %{_pkgconfigdir}/libgda-ui-4.0.pc
 
 %if %{with static_libs}
