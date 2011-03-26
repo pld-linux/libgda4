@@ -16,7 +16,7 @@ Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
 Version:	4.2.5
-Release:	1
+Release:	2
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
@@ -318,6 +318,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{_libgdadir}/plugins/*.{a,la}
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
+
+mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{sr@Latn,sr@latin}
 
 %find_lang libgda-4.0
 %find_lang gda-browser --with-gnome
