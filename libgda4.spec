@@ -16,7 +16,7 @@ Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
 Version:	4.2.5
-Release:	3
+Release:	4
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
@@ -317,6 +317,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_providersdir}/*.{a,la}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/%{_libgdadir}/plugins/*.{a,la}
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
 mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{sr@Latn,sr@latin}
@@ -376,17 +378,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgda-4.0.so
 %attr(755,root,root) %{_libdir}/libgda-report-4.0.so
 %attr(755,root,root) %{_libdir}/libgda-xslt-4.0.so
-%{_libdir}/libgda-4.0.la
-%{_libdir}/libgda-report-4.0.la
-%{_libdir}/libgda-xslt-4.0.la
 %{_datadir}/gir-1.0/Gda-4.0.gir
 %{_includedir}/libgda-4.0
-%{_pkgconfigdir}/libgda-4.0.pc
-%{_pkgconfigdir}/libgda-bdb-4.0.pc
 %{?with_jdbc:%{_pkgconfigdir}/libgda-jdbc-4.0.pc}
 %{?with_mdb:%{_pkgconfigdir}/libgda-mdb-4.0.pc}
 %{?with_mysql:%{_pkgconfigdir}/libgda-mysql-4.0.pc}
 %{?with_pgsql:%{_pkgconfigdir}/libgda-postgres-4.0.pc}
+%{_pkgconfigdir}/libgda-4.0.pc
+%{_pkgconfigdir}/libgda-bdb-4.0.pc
 %{_pkgconfigdir}/libgda-report-4.0.pc
 %{_pkgconfigdir}/libgda-sqlcipher-4.0.pc
 %{_pkgconfigdir}/libgda-sqlite-4.0.pc
@@ -414,7 +413,6 @@ rm -rf $RPM_BUILD_ROOT
 %files ui-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgda-ui-4.0.so
-%{_libdir}/libgda-ui-4.0.la
 %{_datadir}/gir-1.0/Gdaui-4.0.gir
 %{_pkgconfigdir}/libgda-ui-4.0.pc
 
