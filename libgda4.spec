@@ -15,12 +15,12 @@
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
-Version:	4.2.5
-Release:	5
+Version:	4.2.6
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
-# Source0-md5:	d01b2a71aafc8fd8de9405fc49e70bff
+# Source0-md5:	f4be691e398ba7b82e7a89ebb840a15e
 Patch0:		%{name}-configure.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
