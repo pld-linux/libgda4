@@ -15,12 +15,12 @@
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
-Version:	4.2.6
+Version:	4.2.7
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
-# Source0-md5:	f4be691e398ba7b82e7a89ebb840a15e
+# Source0-md5:	8b25fba7fa80b455518f88ab3e57a44f
 Patch0:		%{name}-configure.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
@@ -43,7 +43,7 @@ BuildRequires:	intltool >= 0.40.0
 BuildRequires:	iso-codes
 %{?with_jdbc:BuildRequires:	jdk}
 BuildRequires:	json-glib-devel
-BuildRequires:	libgcrypt-devel
+BuildRequires:	libgcrypt-devel >= 1.1.42
 BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libsoup-devel >= 2.24.0
 BuildRequires:	libtool
