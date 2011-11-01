@@ -3,7 +3,7 @@
 # Conditional build:
 %bcond_without	apidocs		# don't generate API documentation
 %bcond_without	static_libs	# don't build static libraries
-%bcond_without	vala		# Vala support
+%bcond_with	vala		# Vala support (seems broken)
 # - database plugins:
 %bcond_without	jdbc		# build without JDBC plugin
 %bcond_without	ldap		# build without LDAP plugin
@@ -125,6 +125,19 @@ GNU Data Access static libraries.
 
 %description static -l pl.UTF-8
 Statyczne biblioteki GNU Data Access.
+
+%package -n vala-libgda4
+Summary:	libgda 4.x API for Vala language
+Summary(pl.UTF-8):	API libgda 4.x dla języka Vala
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	vala >= 0.14
+
+%description -n vala-libgda4
+libgda 4.x API for Vala language.
+
+%description -n vala-libgda4 -l pl.UTF-8
+API libgda 4.x dla języka Vala.
 
 %package ui
 Summary:	GNU Data Access UI library
@@ -430,6 +443,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgda-4.0.a
 %{_libdir}/libgda-report-4.0.a
 %{_libdir}/libgda-xslt-4.0.a
+%endif
+
+%if %{with vala}
+%files -n vala-libgda4
+%defattr(644,root,root,755)
+%{_datadir}/vala/vapi/libgda-4.0.vapi
 %endif
 
 %files ui
