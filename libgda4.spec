@@ -331,6 +331,7 @@ export JAVA_HOME="%{java_home}"
 %configure \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static} \
+	%{!?with_vala:--disable-vala} \
 	--enable-system-sqlite \
 	--%{?with_apidocs:en}%{!?with_apidocs:dis}able-gtk-doc \
 	--with-html-dir=%{_gtkdocdir} \
