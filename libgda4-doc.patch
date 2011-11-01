@@ -1,0 +1,17 @@
+--- libgda-4.2.10/libgda/sql-parser/gda-statement-struct-util.c.orig	2011-10-26 17:09:36.000000000 +0200
++++ libgda-4.2.10/libgda/sql-parser/gda-statement-struct-util.c	2011-11-01 07:02:57.855601512 +0100
+@@ -354,11 +354,9 @@
+  * - otherwise convert to lower case
+  *
+  * The quoted string:
+- * <itemizedlist>
+- *   <listitem><para>must start and finish with the same single or double quotes character</para></listitem>
+- *   <listitem><para>can contain the delimiter character (the single or double quotes) in the string if every instance
+- *     of it is preceeded with a backslash character or with the delimiter character itself</para></listitem>
+- * </itemizedlist>
++ * - must start and finish with the same single or double quotes character
++ * - can contain the delimiter character (the single or double quotes) in the string if every instance
++ *     of it is preceeded with a backslash character or with the delimiter character itself
+  *
+  * WARNING: @str must NOT be a composed identifier (&lt;part1&gt;."&lt;part2&gt;" for example)
+  * 

@@ -1,9 +1,12 @@
+# TODO: oracle, bdbsql providers
 #
 # Conditional build:
 %bcond_without	apidocs		# don't generate API documentation
 %bcond_without	static_libs	# don't build static libraries
+%bcond_without	vala		# Vala support
 # - database plugins:
 %bcond_without	jdbc		# build without JDBC plugin
+%bcond_without	ldap		# build without LDAP plugin
 %bcond_without	mdb		# build without MDB plugin
 %bcond_without	mysql		# build without MySQL plugin
 %bcond_without	pgsql		# build without PostgreSQL plugin
@@ -15,13 +18,14 @@
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
-Version:	4.2.7
-Release:	2
+Version:	4.2.10
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.bz2
-# Source0-md5:	8b25fba7fa80b455518f88ab3e57a44f
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.xz
+# Source0-md5:	5807a86638cee05ddc48da9c33c94ce6
 Patch0:		%{name}-configure.patch
+Patch1:		%{name}-doc.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
@@ -52,17 +56,23 @@ BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	libxslt-devel >= 1.1.17
 %{?with_mdb:BuildRequires:	mdbtools-devel >= 0.6-0.pre1.7}
 %{?with_mysql:BuildRequires:	mysql-devel}
+%{?with_ldap:BuildRequires:	openldap-devel}
 BuildRequires:	openssl-devel
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.18
 %{?with_pgsql:BuildRequires:	postgresql-devel}
+BuildRequires:	python
 BuildRequires:	readline-devel >= 5.0
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	sqlite3-devel >= 3.6.11
+BuildRequires:	tar >= 1:1.22
+%{?with_vala:BuildRequires:	vala >= 0.14}
+BuildRequires:	xz
+Requires:	glib2 >= 1:2.18.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_libgdadir	libgda-4.0
-%define		_providersdir	%{_libdir}/%{_libgdadir}/providers
+%define		libgdadir	libgda-4.0
+%define		providersdir	%{_libdir}/%{libgdadir}/providers
 
 %description
 GNU Data Access is an attempt to provide uniform access to different
@@ -121,6 +131,7 @@ Summary:	GNU Data Access UI library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access UI
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	gtk+2 >= 2:2.12.0
 
 %description ui
 GNU Data Access UI library.
@@ -188,6 +199,18 @@ This package contains the GDA JDBC provider.
 
 %description provider-jdbc -l pl.UTF-8
 Pakiet dostaczający dane z JDBC dla GDA.
+
+%package provider-ldap
+Summary:	GDA LDAP provider
+Summary(pl.UTF-8):	Źródło danych LDAP
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description provider-ldap
+This package contains the GDA LDAP provider.
+
+%description provider-ldap -l pl.UTF-8
+Pakiet dostarczający dane z LDAP dla GDA.
 
 %package provider-mdb
 Summary:	GDA MDB provider
@@ -279,6 +302,7 @@ Narzędzia graficzne dla GDA.
 %prep
 %setup -q -n libgda-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 cp -f %{_aclocaldir}/introspection.m4 m4/introspection.m4
@@ -314,14 +338,19 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # modules dlopened by *.so through libgmodule
-%{__rm} $RPM_BUILD_ROOT%{_providersdir}/*.{a,la}
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{_libgdadir}/plugins/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{providersdir}/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{libgdadir}/plugins/*.{a,la}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
 mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{sr@Latn,sr@latin}
+
+%py_comp $RPM_BUILD_ROOT%{_datadir}/libgda-4.0/gda_trml2html
+%py_comp $RPM_BUILD_ROOT%{_datadir}/libgda-4.0/gda_trml2pdf
+%py_ocomp $RPM_BUILD_ROOT%{_datadir}/libgda-4.0/gda_trml2html
+%py_ocomp $RPM_BUILD_ROOT%{_datadir}/libgda-4.0/gda_trml2pdf
 
 %find_lang libgda-4.0
 %find_lang gda-browser --with-gnome
@@ -354,10 +383,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libgda-report-4.0.so.4
 %attr(755,root,root) %{_libdir}/libgda-xslt-4.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgda-xslt-4.0.so.4
-%attr(755,root,root) %{_bindir}/gda_trml2*
 %{_libdir}/girepository-1.0/Gda-4.0.typelib
-%dir %{_libdir}/%{_libgdadir}
-%dir %{_providersdir}
+%dir %{_libdir}/%{libgdadir}
+%dir %{providersdir}
 %dir %{_datadir}/libgda-4.0
 %{_datadir}/libgda-4.0/demo
 %{_datadir}/libgda-4.0/dtd
@@ -367,6 +395,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/libgda-4.0/information_schema.xml
 %{_datadir}/libgda-4.0/language-specs
 %{_datadir}/libgda-4.0/server_operation.glade
+# used by libgda-report
+%{_datadir}/libgda-4.0/gda_trml2html
+%{_datadir}/libgda-4.0/gda_trml2pdf
 %dir %{_sysconfdir}/libgda-4.0
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/libgda-4.0/config
 %{_sysconfdir}/libgda-4.0/sales_test.db
@@ -380,12 +411,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgda-xslt-4.0.so
 %{_datadir}/gir-1.0/Gda-4.0.gir
 %{_includedir}/libgda-4.0
+%{_pkgconfigdir}/libgda-4.0.pc
+%{_pkgconfigdir}/libgda-bdb-4.0.pc
 %{?with_jdbc:%{_pkgconfigdir}/libgda-jdbc-4.0.pc}
+%{?with_ldap:%{_pkgconfigdir}/libgda-ldap-4.0.pc}
 %{?with_mdb:%{_pkgconfigdir}/libgda-mdb-4.0.pc}
 %{?with_mysql:%{_pkgconfigdir}/libgda-mysql-4.0.pc}
 %{?with_pgsql:%{_pkgconfigdir}/libgda-postgres-4.0.pc}
-%{_pkgconfigdir}/libgda-4.0.pc
-%{_pkgconfigdir}/libgda-bdb-4.0.pc
 %{_pkgconfigdir}/libgda-report-4.0.pc
 %{_pkgconfigdir}/libgda-sqlcipher-4.0.pc
 %{_pkgconfigdir}/libgda-sqlite-4.0.pc
@@ -402,11 +434,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files ui
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gdaui-demo-4.0
 %attr(755,root,root) %{_libdir}/libgda-ui-4.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgda-ui-4.0.so.4
-%attr(755,root,root) %{_libdir}/%{_libgdadir}/plugins/libgda-ui-plugins.so
-%dir %{_libdir}/%{_libgdadir}/plugins
-%{_libdir}/%{_libgdadir}/plugins/gdaui-*.xml
+%attr(755,root,root) %{_libdir}/%{libgdadir}/plugins/libgda-ui-plugins.so
+%dir %{_libdir}/%{libgdadir}/plugins
+%{_libdir}/%{libgdadir}/plugins/gdaui-*.xml
 %{_libdir}/girepository-1.0/Gdaui-4.0.typelib
 %{_datadir}/libgda-4.0/ui
 
@@ -431,56 +464,63 @@ rm -rf $RPM_BUILD_ROOT
 
 %files provider-db
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_providersdir}/libgda-bdb.so
-%{_datadir}/libgda-4.0/bdb_specs_*
+%attr(755,root,root) %{providersdir}/libgda-bdb.so
+%{_datadir}/libgda-4.0/bdb_specs_*.xml
 
 %if %{with jdbc}
 %files provider-jdbc
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gda-list-jdbc-providers-4.0
-%attr(755,root,root) %{_providersdir}/libgda-jdbc.so
-%{_providersdir}/gdaprovider-4.0.jar
-%{_datadir}/libgda-4.0/jdbc_specs_*
+%attr(755,root,root) %{providersdir}/libgda-jdbc.so
+%{providersdir}/gdaprovider-4.0.jar
+%{_datadir}/libgda-4.0/jdbc_specs_*.xml
+%endif
+
+%if %{with ldap}
+%files provider-ldap
+%defattr(644,root,root,755)
+%attr(755,root,root) %{providersdir}/libgda-ldap.so
+%{_datadir}/libgda-4.0/ldap_specs_*.xml
 %endif
 
 %if %{with mdb}
 %files provider-mdb
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_providersdir}/libgda-mdb.so
-%{_datadir}/libgda-4.0/mdb_specs_*
+%attr(755,root,root) %{providersdir}/libgda-mdb.so
+%{_datadir}/libgda-4.0/mdb_specs_*.xml
 %endif
 
 %if %{with mysql}
 %files provider-mysql
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_providersdir}/libgda-mysql.so
-%{_datadir}/libgda-4.0/mysql_specs_*
+%attr(755,root,root) %{providersdir}/libgda-mysql.so
+%{_datadir}/libgda-4.0/mysql_specs_*.xml
 %endif
 
 %if %{with pgsql}
 %files provider-postgres
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_providersdir}/libgda-postgres.so
-%{_datadir}/libgda-4.0/postgres_specs_*
+%attr(755,root,root) %{providersdir}/libgda-postgres.so
+%{_datadir}/libgda-4.0/postgres_specs_*.xml
 %endif
 
 %files provider-sqlcipher
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_providersdir}/libgda-sqlcipher.so
-%{_datadir}/libgda-4.0/sqlcipher_specs_*
+%attr(755,root,root) %{providersdir}/libgda-sqlcipher.so
+%{_datadir}/libgda-4.0/sqlcipher_specs_*.xml
 
 %files provider-sqlite
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_providersdir}/libgda-sqlite.so
-%{_datadir}/libgda-4.0/sqlite_specs_*
+%attr(755,root,root) %{providersdir}/libgda-sqlite.so
+%{_datadir}/libgda-4.0/sqlite_specs_*.xml
 
 %files provider-web
 %defattr(644,root,root,755)
 %doc providers/web/README
-%attr(755,root,root) %{_providersdir}/libgda-web.so
+%attr(755,root,root) %{providersdir}/libgda-web.so
 %{_datadir}/libgda-4.0/php
 %{_datadir}/libgda-4.0/web
-%{_datadir}/libgda-4.0/web_*
+%{_datadir}/libgda-4.0/web_specs_*.xml
 
 %files tools -f gda-browser.lang
 %defattr(644,root,root,755)
@@ -488,5 +528,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/gda-control-center-4.0
 %{_desktopdir}/gda-browser-4.0.desktop
 %{_desktopdir}/gda-control-center-4.0.desktop
-%{_pixmapsdir}/*.png
-%{_iconsdir}/hicolor/*/*/*.png
+%{_pixmapsdir}/gda-browser-4.0.png
+%{_iconsdir}/hicolor/*/apps/gda-control-center.png
