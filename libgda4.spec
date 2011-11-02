@@ -19,7 +19,7 @@ Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
 Version:	4.2.10
-Release:	1
+Release:	2
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.xz
@@ -318,6 +318,7 @@ Narzędzia graficzne dla GDA.
 %patch1 -p1
 
 %build
+# included version is bash-specific, use system file
 cp -f %{_aclocaldir}/introspection.m4 m4/introspection.m4
 %if %{with jdbc}
 export JAVA_HOME="%{java_home}"
@@ -329,6 +330,7 @@ export JAVA_HOME="%{java_home}"
 %{__autoconf}
 %{__automake}
 %configure \
+	--disable-default-binary \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static} \
 	%{!?with_vala:--disable-vala} \
@@ -384,11 +386,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -f libgda-4.0.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/gda-list-config
 %attr(755,root,root) %{_bindir}/gda-list-config-4.0
-%attr(755,root,root) %{_bindir}/gda-list-server-op
 %attr(755,root,root) %{_bindir}/gda-list-server-op-4.0
-%attr(755,root,root) %{_bindir}/gda-sql
 %attr(755,root,root) %{_bindir}/gda-sql-4.0
 %attr(755,root,root) %{_bindir}/gda-test-connection-4.0
 %attr(755,root,root) %{_libdir}/libgda-4.0.so.*.*.*
@@ -416,7 +415,6 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/libgda-4.0/config
 %{_sysconfdir}/libgda-4.0/sales_test.db
 %{_mandir}/man1/gda-sql-4.0.1*
-%{_mandir}/man1/gda-sql.1*
 
 %files devel
 %defattr(644,root,root,755)
