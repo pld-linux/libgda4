@@ -3,7 +3,7 @@
 # Conditional build:
 %bcond_without	apidocs		# don't generate API documentation
 %bcond_without	static_libs	# don't build static libraries
-%bcond_with	vala		# Vala support (seems broken)
+%bcond_without	vala		# Vala support
 # - database plugins:
 %bcond_without	jdbc		# build without JDBC plugin
 %bcond_without	ldap		# build without LDAP plugin
@@ -349,7 +349,8 @@ export JAVA_HOME="%{java_home}"
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	VALA_VAPIDIR=%{_datadir}/vala/vapi
 
 # modules dlopened by *.so through libgmodule
 %{__rm} $RPM_BUILD_ROOT%{providersdir}/*.{a,la}
