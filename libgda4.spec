@@ -18,14 +18,13 @@
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
-Version:	4.2.10
-Release:	2
+Version:	4.2.11
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.xz
-# Source0-md5:	5807a86638cee05ddc48da9c33c94ce6
+# Source0-md5:	78e91476d265f38017c8c6d7978f8eec
 Patch0:		%{name}-configure.patch
-Patch1:		%{name}-doc.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
@@ -315,7 +314,6 @@ Narzędzia graficzne dla GDA.
 %prep
 %setup -q -n libgda-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 # included version is bash-specific, use system file
