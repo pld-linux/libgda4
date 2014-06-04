@@ -205,7 +205,7 @@ Requires:	%{name} = %{version}-%{release}
 This package contains the GDA Berkeley DB provider.
 
 %description provider-db -l pl.UTF-8
-Pakiet dostaczający dane z Berkeley DB dla GDA.
+Pakiet dostarczający dane z Berkeley DB dla GDA.
 
 %package provider-dbsql
 Summary:	GDA Berkeley DB SQL provider
@@ -217,7 +217,7 @@ Requires:	%{name} = %{version}-%{release}
 This package contains the GDA Berkeley DB SQL provider.
 
 %description provider-dbsql -l pl.UTF-8
-Pakiet dostaczający dane z Berkeley DB SQL dla GDA.
+Pakiet dostarczający dane z Berkeley DB SQL dla GDA.
 
 %package provider-jdbc
 Summary:	GDA JDBC provider
@@ -229,7 +229,7 @@ Requires:	%{name} = %{version}-%{release}
 This package contains the GDA JDBC provider.
 
 %description provider-jdbc -l pl.UTF-8
-Pakiet dostaczający dane z JDBC dla GDA.
+Pakiet dostarczający dane z JDBC dla GDA.
 
 %package provider-ldap
 Summary:	GDA LDAP provider
