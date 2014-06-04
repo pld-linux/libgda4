@@ -1,0 +1,12 @@
+--- libgda-4.2.13/libgda/gda-server-provider.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-server-provider.h	2014-06-03 20:38:48.267816146 +0200
+@@ -226,6 +226,9 @@
+ typedef void (*GdaServerProviderExecCallback) (GdaServerProvider *provider, GdaConnection *cnc, guint task_id, 
+ 					       GObject *result_obj, const GError *error, gpointer data);
+ 
++/**
++ * GDA_SERVER_PROVIDER_UNDEFINED_LIMITING_THREAD: (skip)
++ */
+ #define GDA_SERVER_PROVIDER_UNDEFINED_LIMITING_THREAD ((gpointer)0x1)
+ struct _GdaServerProviderClass {
+ 	GObjectClass parent_class;

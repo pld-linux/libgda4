@@ -1,0 +1,84 @@
+--- libgda-4.2.13/configure.ac.orig	2012-04-27 17:34:22.000000000 +0200
++++ libgda-4.2.13/configure.ac	2014-06-03 21:32:41.001082101 +0200
+@@ -242,6 +242,28 @@
+ 				AC_MSG_ERROR([Graphviz support requested but not found.])
+ 			fi
+ 			have_graphviz=no])
++		if test "x$have_graphviz" = "xyes"
++		then
++			dnl test if new API is supported
++			AC_MSG_CHECKING([whether Graphviz's new API is supported])
++			graphviz_save_CFLAGS=$CFLAGS
++			CFLAGS="$CFLAGS $GRAPHVIZ_CFLAGS"
++			AC_COMPILE_IFELSE([AC_LANG_SOURCE([
++#include <gvc.h>
++int main() {
++    Agraph_t *graph;
++    graph = agopen ("BrowserCanvasLayout", Agdirected, NULL);
++    return 0;
++}
++])],
++                        graphviz_new_api=yes, graphviz_new_api=no)
++			CLFAGS=$graphviz_save_CFLAGS
++
++			AC_MSG_RESULT($graphviz_new_api)
++			if test "$graphviz_new_api" = "yes"; then
++			   	AC_DEFINE(GRAPHVIZ_NEW_API,[1],[define if Graphviz's new API is available])
++			fi
++		fi
+ 	fi
+ fi
+ 
+--- libgda-4.2.13/tools/browser/canvas/browser-canvas.c.orig	2012-04-27 17:34:25.000000000 +0200
++++ libgda-4.2.13/tools/browser/canvas/browser-canvas.c	2014-06-03 21:31:05.527750758 +0200
+@@ -934,6 +934,15 @@
+ 	if (!gvc)
+ 		gvc = gvContext ();
+ 
++#ifdef GRAPHVIZ_NEW_API
++	graph = agopen ("BrowserCanvasLayout", Agdirected, NULL);
++        agnode (graph, "shape", "box");
++        agset (graph, "height", ".1");
++        agset (graph, "width", ".1");
++        agset (graph, "fixedsize", "true");
++        agset (graph, "pack", "true");
++	agset (graph, "packmode", "node");
++#else
+ 	graph = agopen ("BrowserCanvasLayout", AGRAPH);
+         agnodeattr (graph, "shape", "box");
+         agnodeattr (graph, "height", ".1");
+@@ -941,6 +950,7 @@
+         agnodeattr (graph, "fixedsize", "true");
+         agnodeattr (graph, "pack", "true");
+ 	agnodeattr (graph, "packmode", "node");
++#endif
+ 
+ 
+ 	if (class->get_layout_items)
+@@ -968,7 +978,11 @@
+ 		nodes_list = g_slist_prepend (nodes_list, nl);
+ 		
+ 		tmp = g_strdup_printf ("%p", item);
++#ifdef GRAPHVIZ_NEW_API
++		node = agnode (graph, tmp, 0);
++#else
+ 		node = agnode (graph, tmp);
++#endif
+ 		nl->node = node;
+ 		g_hash_table_insert (nodes_hash, item, node);
+ 		
+@@ -1011,8 +1025,13 @@
+ 			Agnode_t *from_node, *to_node;
+ 			from_node = (Agnode_t*) g_hash_table_lookup (nodes_hash, from);
+ 			to_node = (Agnode_t*) g_hash_table_lookup (nodes_hash, to);
+-			if (from_node && to_node)
++			if (from_node && to_node) {
++#ifdef GRAPHVIZ_NEW_API
++				agedge (graph, from_node, to_node, "", 0);
++#else
+ 				agedge (graph, from_node, to_node);
++#endif
++			}
+ 		}
+ 	}
+ 

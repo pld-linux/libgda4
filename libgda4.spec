@@ -1,20 +1,22 @@
-# TODO: oracle, bdbsql providers
 #
 # Conditional build:
-%bcond_without	apidocs		# don't generate API documentation
-%bcond_without	static_libs	# don't build static libraries
+%bcond_without	apidocs		# API documentation
+%bcond_without	static_libs	# static libraries build
 %bcond_without	vala		# Vala support
 # - database plugins:
-%bcond_without	jdbc		# build without JDBC plugin
-%bcond_without	ldap		# build without LDAP plugin
-%bcond_without	mdb		# build without MDB plugin
-%bcond_without	mysql		# build without MySQL plugin
-%bcond_without	pgsql		# build without PostgreSQL plugin
+%bcond_without	dbsql		# BerkeleyDB SQL plugin
+%bcond_without	jdbc		# JDBC plugin
+%bcond_without	ldap		# LDAP plugin
+%bcond_without	mdb		# MDB plugin
+%bcond_without	mysql		# MySQL plugin
+%bcond_with	oci		# Oracle DB plugin
+%bcond_without	pgsql		# PostgreSQL plugin
 #
-%ifnarch i586 i686 pentium3 pentium4 athlon %{x8664}
+%ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664}
 %undefine	with_jdbc
 %endif
-#
+%define vala_ver	0.24
+
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
 Name:		libgda4
@@ -25,11 +27,14 @@ Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.xz
 # Source0-md5:	d9a69fd4c08469c072c588ae9e73800b
 Patch0:		%{name}-configure.patch
+Patch1:		%{name}-gir.patch
+Patch2:		%{name}-graphviz.patch
 URL:		http://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	bison
 BuildRequires:	db-devel
+%{?with_dbsql:BuildRequires:	db-sql-devel}
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
 BuildRequires:	gettext-devel
@@ -57,15 +62,17 @@ BuildRequires:	libxslt-devel >= 1.1.17
 %{?with_mysql:BuildRequires:	mysql-devel}
 %{?with_ldap:BuildRequires:	openldap-devel}
 BuildRequires:	openssl-devel
+%{?with_oci:BuildRequires:	oracle-instantclient-devel}
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig >= 1:0.18
 %{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	python
 BuildRequires:	readline-devel >= 5.0
 BuildRequires:	rpmbuild(macros) >= 1.601
+BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel >= 3.6.11
 BuildRequires:	tar >= 1:1.22
-%{?with_vala:BuildRequires:	vala >= 0.14}
+%{?with_vala:BuildRequires:	vala >= 2:%{vala_ver}}
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.18.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -130,7 +137,7 @@ Summary:	libgda 4.x API for Vala language
 Summary(pl.UTF-8):	API libgda 4.x dla języka Vala
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Requires:	vala >= 0.14
+Requires:	vala >= 2:%{vala_ver}
 
 %description -n vala-libgda4
 libgda 4.x API for Vala language.
@@ -200,6 +207,18 @@ This package contains the GDA Berkeley DB provider.
 %description provider-db -l pl.UTF-8
 Pakiet dostaczający dane z Berkeley DB dla GDA.
 
+%package provider-dbsql
+Summary:	GDA Berkeley DB SQL provider
+Summary(pl.UTF-8):	Źródło danych Berkeley DB SQL dla GDA
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description provider-dbsql
+This package contains the GDA Berkeley DB SQL provider.
+
+%description provider-dbsql -l pl.UTF-8
+Pakiet dostaczający dane z Berkeley DB SQL dla GDA.
+
 %package provider-jdbc
 Summary:	GDA JDBC provider
 Summary(pl.UTF-8):	Źródło danych JDBC dla GDA
@@ -248,6 +267,18 @@ This package contains the GDA MySQL provider.
 
 %description provider-mysql -l pl.UTF-8
 Pakiet dostarczający dane z MySQL dla GDA.
+
+%package provider-oracle
+Summary:	GDA Oracle provider
+Summary(pl.UTF-8):	Źródło danych Oracle dla GDA
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description provider-oracle
+This package contains the GDA Oracle provider.
+
+%description provider-oracle -l pl.UTF-8
+Pakiet dostarczający dane z bazy Oracle dla GDA.
 
 %package provider-postgres
 Summary:	GDA PostgreSQL provider
@@ -314,6 +345,10 @@ Narzędzia graficzne dla GDA.
 %prep
 %setup -q -n libgda-%{version}
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+
+%{__sed} -i -e 's/libvala-0.14 >= 0.14/libvala-%{vala_ver}/' configure.ac
 
 %build
 # included version is bash-specific, use system file
@@ -333,15 +368,15 @@ export JAVA_HOME="%{java_home}"
 	%{!?with_static_libs:--disable-static} \
 	%{!?with_vala:--disable-vala} \
 	--enable-system-sqlite \
-	--%{?with_apidocs:en}%{!?with_apidocs:dis}able-gtk-doc \
+	--enable-gtk-doc%{!?with_apidocs:=no} \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-bdb=/usr \
 	--with-bdb-libdir-name=%{_lib} \
-	--with%{!?with_jdbc:out}-java \
-	--with%{!?with_mdb:out}-mdb \
-	--with%{!?with_mysql:out}-mysql \
-	--with%{!?with_pgsql:out}-postgres \
-	--without-oracle
+	--with-java%{!?with_jdbc:=no} \
+	--with-mdb%{!?with_mdb:=no} \
+	--with-mysql%{!?with_mysql:=no} \
+	--with-oracle%{!?with_oci:=no} \
+	--with-postgres%{!?with_pgsql:=no}
 
 %{__make} -j1
 
@@ -424,10 +459,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libgda-4.0
 %{_pkgconfigdir}/libgda-4.0.pc
 %{_pkgconfigdir}/libgda-bdb-4.0.pc
+%{?with_dbsql:%{_pkgconfigdir}/libgda-bdbsql-4.0.pc}
 %{?with_jdbc:%{_pkgconfigdir}/libgda-jdbc-4.0.pc}
 %{?with_ldap:%{_pkgconfigdir}/libgda-ldap-4.0.pc}
 %{?with_mdb:%{_pkgconfigdir}/libgda-mdb-4.0.pc}
 %{?with_mysql:%{_pkgconfigdir}/libgda-mysql-4.0.pc}
+%{?with_oci:%{_pkgconfigdir}/libgda-oracle-4.0.pc}
 %{?with_pgsql:%{_pkgconfigdir}/libgda-postgres-4.0.pc}
 %{_pkgconfigdir}/libgda-report-4.0.pc
 %{_pkgconfigdir}/libgda-sqlcipher-4.0.pc
@@ -484,6 +521,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{providersdir}/libgda-bdb.so
 %{_datadir}/libgda-4.0/bdb_specs_*.xml
 
+%if %{with dbsql}
+%files provider-dbsql
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgda-4.0/providers/libgda-bdbsql.so
+%{_datadir}/libgda-4.0/bdbsql_specs_*.xml
+%endif
+
 %if %{with jdbc}
 %files provider-jdbc
 %defattr(644,root,root,755)
@@ -512,6 +556,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{providersdir}/libgda-mysql.so
 %{_datadir}/libgda-4.0/mysql_specs_*.xml
+%endif
+
+%if %{with oci}
+%files provider-oracle
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgda-4.0/providers/libgda-oracle.so
+%{_datadir}/libgda-4.0/oracle_specs_*.xml
 %endif
 
 %if %{with pgsql}
