@@ -37,7 +37,7 @@ BuildRequires:	db-devel
 %{?with_dbsql:BuildRequires:	db-sql-devel}
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	flex
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.18.0
 BuildRequires:	glibc-misc
 BuildRequires:	gnome-doc-utils >= 0.9.0
