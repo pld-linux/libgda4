@@ -37,7 +37,7 @@
  
 +#ifdef GRAPHVIZ_NEW_API
 +	graph = agopen ("BrowserCanvasLayout", Agdirected, NULL);
-+        agnode (graph, "shape", "box");
++        agset (graph, "shape", "box");
 +        agset (graph, "height", ".1");
 +        agset (graph, "width", ".1");
 +        agset (graph, "fixedsize", "true");
