@@ -139,6 +139,7 @@ Summary(pl.UTF-8):	API libgda 4.x dla języka Vala
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	vala >= 2:%{vala_ver}
+BuildArch:	noarch
 
 %description -n vala-libgda4
 libgda 4.x API for Vala language.
