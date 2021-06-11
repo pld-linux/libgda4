@@ -68,6 +68,7 @@ BuildRequires:	pkgconfig >= 1:0.18
 %{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	python
 BuildRequires:	readline-devel >= 5.0
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.601
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel >= 3.6.11
@@ -188,6 +189,7 @@ Summary:	GNU Data Access API documentation
 Summary(pl.UTF-8):	Dokumentacja API GNU Data Access
 Group:		Documentation
 Requires:	gtk-doc-common
+BuildArch:	noarch
 
 %description apidocs
 GNU Data Access API documentation.
