@@ -395,7 +395,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{!?with_apidocs:rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}}
 
-mv -f $RPM_BUILD_ROOT%{_datadir}/locale/{sr@Latn,sr@latin}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{sr@Latn,sr@latin}
 
 %py_comp $RPM_BUILD_ROOT%{_datadir}/libgda-4.0/gda_trml2html
 %py_comp $RPM_BUILD_ROOT%{_datadir}/libgda-4.0/gda_trml2pdf
@@ -410,6 +410,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
+
+%post	ui -p /sbin/ldconfig
+%postun	ui -p /sbin/ldconfig
 
 %post tools
 %update_icon_cache hicolor
