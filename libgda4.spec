@@ -24,12 +24,12 @@ Version:	4.2.13
 Release:	2
 License:	LGPL v2+/GPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgda/4.2/libgda-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/libgda/4.2/libgda-%{version}.tar.xz
 # Source0-md5:	d9a69fd4c08469c072c588ae9e73800b
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-gir.patch
 Patch2:		%{name}-graphviz.patch
-URL:		http://www.gnome-db.org/
+URL:		https://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	bison
