@@ -1,0 +1,9 @@
+--- libgda-4.2.13/libgda/Gda-4.0.metadata.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/Gda-4.0.metadata	2023-02-02 17:02:44.363581808 +0100
+@@ -1,5 +1,5 @@
+ // Vala Bindings for GDA
+-ValueList type="GLib.List<GLib.Value>"
++ValueList type="GLib.List<GLib.Value?>"
+ ServerProviderMeta skip
+ ServerProviderXa skip
+ // libxml2: replace xml.NodePtr by xml.Node* used by Vala bindings

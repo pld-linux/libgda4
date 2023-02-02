@@ -1,0 +1,24 @@
+--- libgda-4.2.13/libgda/sqlite/Makefile.am.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/sqlite/Makefile.am	2023-02-01 17:01:22.627394979 +0100
+@@ -77,7 +77,7 @@ libgda_bdbsqlite_la_LDFLAGS = -export-dy
+ libgda_bdbsqlite_la_LIBADD = 
+ 
+ libgda_sqlcipher_la_SOURCES = $(sqlitesources)
+-libgda_sqlcipher_la_CFLAGS = -DPNAME=\""SQLCipher"\" -DCLASS_PREFIX=\""GdaSQLCipher"\" -DSTATIC_SQLITE -DSQLITE_HAS_CODEC -DSEARCH_LIB_PATH=\"""\"
++libgda_sqlcipher_la_CFLAGS = -DPNAME=\""SQLCipher"\" -DCLASS_PREFIX=\""GdaSQLCipher"\" -DSQLITE_HAS_CODEC -DSEARCH_LIB_PATH=\"""\"
+ libgda_sqlcipher_la_LDFLAGS = -export-dynamic -module -avoid-version $(NO_UNDEFINED)
+ libgda_sqlcipher_la_LIBADD = 
+ 
+--- libgda-4.2.13/libgda/sqlite/gda-sqlite-pstmt.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/sqlite/gda-sqlite-pstmt.h	2023-02-01 17:01:53.534167852 +0100
+@@ -21,7 +21,9 @@
+ #define __GDA_SQLITE_PSTMT_H__
+ 
+ #include <libgda/providers-support/gda-pstmt.h>
+-#ifdef HAVE_SQLITE
++#ifdef WITH_BDBSQLITE
++#include <dbsql.h>
++#elif defined(HAVE_SQLITE) && !defined(STATIC_SQLITE)
+ #include <sqlite3.h>
+ #else
+ #include "sqlite-src/sqlite3.h"

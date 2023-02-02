@@ -1,0 +1,563 @@
+--- libgda-4.2.13/tools/browser/dnd.c.orig	2012-04-27 17:34:25.000000000 +0200
++++ libgda-4.2.13/tools/browser/dnd.c	2023-02-01 18:58:59.640011844 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/gda-column.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-column.h	2023-02-01 19:20:37.066316416 +0100
+@@ -1,6 +1,6 @@
+ /*
+  * Copyright (C) 2005 - 2009 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2008 Przemys≈Çaw Grzegorczyk <pgrzegorczyk@gmail.com>
+  *
+  * This library is free software; you can redistribute it and/or
+--- libgda-4.2.13/libgda/gda-connection-internal.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-connection-internal.h	2023-02-01 19:22:00.159199596 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/gda-connection-sqlite.h.orig	2012-03-06 22:33:07.000000000 +0100
++++ libgda-4.2.13/libgda/gda-connection-sqlite.h	2023-02-01 19:23:04.092186575 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/gda-connection.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-connection.h	2023-02-01 19:23:46.641956063 +0100
+@@ -6,7 +6,7 @@
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@ximian.com>
+  * Copyright (C) 2003 Filip Van Raemdonck <mechanix@debian.org>
+  * Copyright (C) 2004 - 2005 Alan Knowles <alank@src.gnome.org>
+- * Copyright (C) 2004 JosÈ MarÌa Casanova Crespo <jmcasanova@igalia.com>
++ * Copyright (C) 2004 Jos√© Mar√≠a Casanova Crespo <jmcasanova@igalia.com>
+  * Copyright (C) 2005 - 2009 Bas Driessen <bas.driessen@xobas.com>
+  * Copyright (C) 2006 - 2008 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2007 Leonardo Boshell <lb@kmc.com.co>
+--- libgda-4.2.13/libgda/gda-data-model-extra.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/gda-data-model-extra.h	2023-02-01 19:27:00.514239100 +0100
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2003 Rodrigo Moya <rodrigo@gnome-db.org>
+  * Copyright (C) 2001 - 2008 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@gnome-db.org>
+--- libgda-4.2.13/libgda/gda-data-model-iter-extra.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/gda-data-model-iter-extra.h	2023-02-01 19:28:06.263882904 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2008 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/gda-data-model.h.orig	2023-02-01 19:28:59.803592854 +0100
++++ libgda-4.2.13/libgda/gda-data-model.h	2023-02-01 19:29:07.296885593 +0100
+@@ -4,7 +4,7 @@
+  * Copyright (C) 2003 Laurent Sansonetti <lrz@gnome.org>
+  * Copyright (C) 2005 Dan Winship <danw@src.gnome.org>
+  * Copyright (C) 2005 - 2011 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2007 Murray Cumming <murrayc@murrayc.com>
+  *
+  * This library is free software; you can redistribute it and/or
+--- libgda-4.2.13/libgda/gda-meta-store-extra.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/gda-meta-store-extra.h	2023-02-01 19:30:52.402982851 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/gda-meta-struct-private.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/gda-meta-struct-private.h	2023-02-01 19:31:12.689539616 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2008 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/gda-mutex.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-mutex.h	2023-02-01 19:31:34.536087929 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/gda-row.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-row.h	2023-02-01 19:32:15.385866627 +0100
+@@ -3,10 +3,10 @@
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@gnome-db.org>
+  * Copyright (C) 2003 Laurent Sansonetti <laurent@datarescue.be>
+- * Copyright (C) 2003 Xabier RodrÌguez Calvar <xrcalvar@igalia.com>
++ * Copyright (C) 2003 Xabier Rodr√≠guez Calvar <xrcalvar@igalia.com>
+  * Copyright (C) 2004 Paisa  Seeluangsawat <paisa@users.sf.net>
+  * Copyright (C) 2005 Bas Driessen <bas.driessen@xobas.com>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Lesser General Public
+--- libgda-4.2.13/libgda/gda-server-operation-private.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/gda-server-operation-private.h	2023-02-01 19:32:38.715740238 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/gda-server-provider-private.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/gda-server-provider-private.h	2023-02-01 19:33:39.665410046 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2005 Dan Winship <danw@src.gnome.org>
+  * Copyright (C) 2005 - 2008 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2007 Murray Cumming <murrayc@murrayc.com>
+  *
+  * This library is free software; you can redistribute it and/or
+--- libgda-4.2.13/libgda/gda-util.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-util.h	2023-02-01 19:33:59.775301101 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  * Copyright (C) 2006 - 2007 Murray Cumming <murrayc@murrayc.com>
+--- libgda-4.2.13/libgda/libgda-global-variables.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/libgda-global-variables.h	2023-02-01 19:34:21.375184084 +0100
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2003 Rodrigo Moya <rodrigo@gnome-db.org>
+  * Copyright (C) 2001 - 2010 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@gnome-db.org>
+--- libgda-4.2.13/libgda/libgda.h.in.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/libgda.h.in	2023-02-01 20:18:36.600799493 +0100
+@@ -1,14 +1,14 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2004 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Andrew Hill <andru@src.gnome.org>
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@ximian.com>
+  * Copyright (C) 2003 - 2006 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2004 Szalai Ferenc <szferi@einstein.ki.iif.hu>
+  * Copyright (C) 2005 Bas Driessen <bas.driessen@xobas.com>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Lesser General Public
+--- libgda-4.2.13/libgda/libgda.h.orig	2023-02-01 19:00:55.232718958 +0100
++++ libgda-4.2.13/libgda/libgda.h	2023-02-01 19:34:44.845056937 +0100
+@@ -1,14 +1,14 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2004 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Andrew Hill <andru@src.gnome.org>
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@ximian.com>
+  * Copyright (C) 2003 - 2006 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2004 Szalai Ferenc <szferi@einstein.ki.iif.hu>
+  * Copyright (C) 2005 Bas Driessen <bas.driessen@xobas.com>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Lesser General Public
+--- libgda-4.2.13/libgda/binreloc/gda-binreloc.h.orig	2012-03-06 22:33:07.000000000 +0100
++++ libgda-4.2.13/libgda/binreloc/gda-binreloc.h	2023-02-01 19:34:59.684976542 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2007 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/providers-support/gda-data-select-priv.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/providers-support/gda-data-select-priv.h	2023-02-01 19:35:55.928005181 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/sql-parser/gda-sql-statement.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/sql-parser/gda-sql-statement.h	2023-02-01 19:36:47.564392110 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2008 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/sql-parser/gda-statement-struct-delete.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/sql-parser/gda-statement-struct-delete.h	2023-02-01 19:37:08.944276285 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2005 Dan Winship <danw@src.gnome.org>
+  * Copyright (C) 2005 - 2009 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2007 Armin Burgmeier <armin@openismus.com>
+  * Copyright (C) 2007 - 2009 Murray Cumming <murrayc@murrayc.com>
+  *
+--- libgda-4.2.13/libgda/sql-parser/gda-statement-struct-unknown.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/sql-parser/gda-statement-struct-unknown.h	2023-02-01 19:37:48.537395124 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  * Copyright (C) 2009 Murray Cumming <murrayc@murrayc.com>
+--- libgda-4.2.13/libgda/sql-parser/gda-statement-struct-util.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/sql-parser/gda-statement-struct-util.h	2023-02-01 19:38:18.147234714 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2005 Dan Winship <danw@src.gnome.org>
+  * Copyright (C) 2005 - 2009 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2007 - 2009 Murray Cumming <murrayc@murrayc.com>
+  *
+  * This library is free software; you can redistribute it and/or
+--- libgda-4.2.13/libgda/sqlite/gda-sqlite-provider.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/sqlite/gda-sqlite-provider.h	2023-02-01 19:38:39.533785519 +0100
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001 - 2002 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 - 2002 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  * Copyright (C) 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+  * Copyright (C) 2007 - 2009 Vivien Malerba <malerba@gnome-db.org>
+--- libgda-4.2.13/libgda/sqlite/gda-sqlite-recordset.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/sqlite/gda-sqlite-recordset.h	2023-02-01 19:49:55.626789476 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 - 2002 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 - 2002 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/sqlite/gda-sqlite.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/sqlite/gda-sqlite.h	2023-02-01 19:57:20.687711707 +0100
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001 - 2002 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 - 2002 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+--- libgda-4.2.13/libgda/sqlite/virtual/gda-vconnection-data-model-private.h.orig	2012-03-10 14:46:22.000000000 +0100
++++ libgda-4.2.13/libgda/sqlite/virtual/gda-vconnection-data-model-private.h	2023-02-01 19:57:43.360922209 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/sqlite/virtual/libgda-virtual.h.in.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/sqlite/virtual/libgda-virtual.h.in	2023-02-01 20:19:36.180476722 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/sqlite/virtual/libgda-virtual.h.orig	2023-02-01 19:00:55.399384722 +0100
++++ libgda-4.2.13/libgda/sqlite/virtual/libgda-virtual.h	2023-02-01 19:58:01.677489647 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda/thread-wrapper/gda-thread-provider.h.orig	2012-03-06 22:33:08.000000000 +0100
++++ libgda-4.2.13/libgda/thread-wrapper/gda-thread-provider.h	2023-02-01 19:58:21.587381785 +0100
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001 - 2002 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 - 2002 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  * Copyright (C) 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+  * Copyright (C) 2007 - 2009 Vivien Malerba <malerba@gnome-db.org>
+--- libgda-4.2.13/libgda-report/gda-report-document-private.h.orig	2012-03-06 22:33:07.000000000 +0100
++++ libgda-4.2.13/libgda-report/gda-report-document-private.h	2023-02-01 19:58:36.717299820 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2007 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda-report/gda-report-document.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda-report/gda-report-document.h	2023-02-01 19:58:56.283860485 +0100
+@@ -1,6 +1,6 @@
+ /*
+  * Copyright (C) 2001 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2002 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2002 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  * Copyright (C) 2003 Santi Camps <santi@gnome-db.org>
+  * Copyright (C) 2003 Santi Camps Taltavull <santi@src.gnome.org>
+--- libgda-4.2.13/libgda-report/libgda-report.h.orig	2012-03-06 22:33:07.000000000 +0100
++++ libgda-4.2.13/libgda-report/libgda-report.h	2023-02-01 19:59:10.407117306 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2007 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda-report/engine/rt-parser.h.orig	2012-03-06 22:33:07.000000000 +0100
++++ libgda-4.2.13/libgda-report/engine/rt-parser.h	2023-02-01 19:59:26.080365730 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda-ui/gdaui-easy.h.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda-ui/gdaui-easy.h	2023-02-01 19:59:45.150262420 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda-ui/libgda-ui.h.orig	2012-03-06 22:33:07.000000000 +0100
++++ libgda-4.2.13/libgda-ui/libgda-ui.h	2023-02-01 20:00:01.063509544 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13/libgda-xslt/libgda-xslt.h.orig	2012-03-06 22:33:07.000000000 +0100
++++ libgda-4.2.13/libgda-xslt/libgda-xslt.h	2023-02-01 20:00:23.676720371 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2009 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  *
+--- libgda-4.2.13//libgda/gda-column.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13//libgda/gda-column.c	2023-02-01 20:33:35.912594170 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2005 Andrew Hill <andru@src.gnome.org>
+  * Copyright (C) 2005 - 2010 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2007 - 2008 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2008 Johannes Schmid <johannes.schmid@openismus.com>
+  * Copyright (C) 2008 Przemys≈Çaw Grzegorczyk <pgrzegorczyk@gmail.com>
+--- libgda-4.2.13/libgda/gda-connection.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-connection.c	2023-02-01 20:34:24.605663710 +0100
+@@ -10,10 +10,10 @@
+  * Copyright (C) 2003 Paisa Seeluangsawat <paisa@users.sf.net>
+  * Copyright (C) 2004 - 2005 Alan Knowles <alank@src.gnome.org>
+  * Copyright (C) 2004 Dani Baeyens <daniel.baeyens@hispalinux.es>
+- * Copyright (C) 2004 JosÈ MarÌa Casanova Crespo <jmcasanova@igalia.com>
++ * Copyright (C) 2004 Jos√© Mar√≠a Casanova Crespo <jmcasanova@igalia.com>
+  * Copyright (C) 2004 Szalai Ferenc <szferi@einstein.ki.iif.hu>
+  * Copyright (C) 2005 - 2009 Bas Driessen <bas.driessen@xobas.com>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2006 - 2010 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2007 Armin Burgmeier <armin@openismus.com>
+  * Copyright (C) 2007 Leonardo Boshell <lb@kmc.com.co>
+--- libgda-4.2.13/libgda/gda-data-model-array.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-data-model-array.c	2023-02-01 20:34:46.302212836 +0100
+@@ -6,7 +6,7 @@
+  * Copyright (C) 2004 Szalai Ferenc <szferi@einstein.ki.iif.hu>
+  * Copyright (C) 2005 Bas Driessen <bas.driessen@xobas.com>
+  * Copyright (C) 2005 - 2011 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2006 - 2008 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2008 Phil Longstaff <plongstaff@rogers.com>
+  * Copyright (C) 2008 Przemys≈Çaw Grzegorczyk <pgrzegorczyk@gmail.com>
+--- libgda-4.2.13/libgda/gda-data-model.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-data-model.c	2023-02-01 20:35:20.382028210 +0100
+@@ -7,7 +7,7 @@
+  * Copyright (C) 2003 Philippe CHARLIER <p.charlier@chello.be>
+  * Copyright (C) 2004 Dani Baeyens <daniel.baeyens@hispalinux.es>
+  * Copyright (C) 2004 Szalai Ferenc <szferi@einstein.ki.iif.hu>
+- * Copyright (C) 2004 - 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2004 - 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2005 - 2009 Bas Driessen <bas.driessen@xobas.com>
+  * Copyright (C) 2005 Dan Winship <danw@src.gnome.org>
+  * Copyright (C) 2005 Stanislav Brabec <sbrabec@suse.de>
+--- libgda-4.2.13/libgda/gda-init.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-init.c	2023-02-01 20:35:40.481919320 +0100
+@@ -1,7 +1,7 @@
+ /*
+  * Copyright (C) 2000 Reinhard M√ºller <reinhard@src.gnome.org>
+  * Copyright (C) 2000 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+- * Copyright (C) 2001 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 Andrew Hill <andru@src.gnome.org>
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@gnome-db.org>
+--- libgda-4.2.13/libgda/gda-row.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-row.c	2023-02-01 20:36:11.345085453 +0100
+@@ -4,7 +4,7 @@
+  * Copyright (C) 2002 Gonzalo Paniagua Javier <gonzalo@gnome-db.org>
+  * Copyright (C) 2003 Laurent Sansonetti <laurent@datarescue.be>
+  * Copyright (C) 2003 Paisa Seeluangsawat <paisa@users.sf.net>
+- * Copyright (C) 2003 Xabier RodrÌguez Calvar <xrcalvar@igalia.com>
++ * Copyright (C) 2003 Xabier Rodr√≠guez Calvar <xrcalvar@igalia.com>
+  * Copyright (C) 2004 Paisa  Seeluangsawat <paisa@users.sf.net>
+  * Copyright (C) 2004 Szalai Ferenc <szferi@einstein.ki.iif.hu>
+  * Copyright (C) 2005 - 2011 Vivien Malerba <malerba@gnome-db.org>
+--- libgda-4.2.13/libgda/gda-server-provider.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-server-provider.c	2023-02-01 20:36:31.891640809 +0100
+@@ -8,7 +8,7 @@
+  * Copyright (C) 2004 Julio M. Merino Vidal <jmmv@menta.net>
+  * Copyright (C) 2005 - 2006 Bas Driessen <bas.driessen@xobas.com>
+  * Copyright (C) 2005 - 2010 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2007 Armin Burgmeier <armin@openismus.com>
+  * Copyright (C) 2008 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2008 Przemys≈Çaw Grzegorczyk <pgrzegorczyk@gmail.com>
+--- libgda-4.2.13/libgda/gda-util.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/gda-util.c	2023-02-01 20:37:25.441350706 +0100
+@@ -4,7 +4,7 @@
+  * Copyright (C) 2003 - 2004 Laurent Sansonetti <lrz@gnome.org>
+  * Copyright (C) 2003 Paisa Seeluangsawat <paisa@users.sf.net>
+  * Copyright (C) 2004 Caolan McNamara <caolanm@redhat.com>
+- * Copyright (C) 2004 J¸rg Billeter <j@bitron.ch>
++ * Copyright (C) 2004 J√ºrg Billeter <j@bitron.ch>
+  * Copyright (C) 2004 - 2010 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2005 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2007 - 2009 Armin Burgmeier <armin@openismus.com>
+--- libgda-4.2.13/libgda/sqlite/gda-sqlite-provider.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/sqlite/gda-sqlite-provider.c	2023-02-01 20:38:09.794443758 +0100
+@@ -1,15 +1,15 @@
+ /*
+- * Copyright (C) 2001 - 2002 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 - 2002 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2003 Rodrigo Moya <rodrigo@gnome-db.org>
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  * Copyright (C) 2004 Benjamin Otte <in7y118@public.uni-hamburg.de>
+  * Copyright (C) 2004 J.H.M. Dassen (Ray) <jdassen@debian.org>
+  * Copyright (C) 2004 Julio M. Merino Vidal <jmmv@menta.net>
+- * Copyright (C) 2004 J¸rg Billeter <j@bitron.ch>
++ * Copyright (C) 2004 J√ºrg Billeter <j@bitron.ch>
+  * Copyright (C) 2004 Nikolai Weibull <ruby-gnome2-devel-en-list@pcppopper.org>
+  * Copyright (C) 2005 Denis Fortin <denis.fortin@free.fr>
+  * Copyright (C) 2005 - 2011 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2008 - 2009 Bas Driessen <bas.driessen@xobas.com>
+  * Copyright (C) 2008 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2009 Armin Burgmeier <armin@openismus.com>
+--- libgda-4.2.13/libgda/sqlite/gda-sqlite-recordset.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/sqlite/gda-sqlite-recordset.c	2023-02-01 20:38:34.064312276 +0100
+@@ -1,10 +1,10 @@
+ /*
+- * Copyright (C) 2001 - 2002 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 - 2002 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>
+  * Copyright (C) 2002 - 2005 Rodrigo Moya <rodrigo@gnome-db.org>
+  * Copyright (C) 2005 Denis Fortin <denis.fortin@free.fr>
+  * Copyright (C) 2005 - 2011 Vivien Malerba <malerba@gnome-db.org>
+- * Copyright (C) 2005 ¡lvaro PeÒa <alvaropg@telefonica.net>
++ * Copyright (C) 2005 √Ålvaro Pe√±a <alvaropg@telefonica.net>
+  * Copyright (C) 2006 - 2008 Murray Cumming <murrayc@murrayc.com>
+  * Copyright (C) 2007 Armin Burgmeier <arminb@src.gnome.org>
+  * Copyright (C) 2009 Bas Driessen <bas.driessen@xobas.com>
+--- libgda-4.2.13/libgda/sqlite/gda-sqlite-util.c.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/libgda/sqlite/gda-sqlite-util.c	2023-02-01 20:38:54.397535455 +0100
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2001 - 2002 Carlos PerellÛ MarÌn <carlos@gnome-db.org>
++ * Copyright (C) 2001 - 2002 Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+  * Copyright (C) 2001 - 2002 Rodrigo Moya <rodrigo@gnome-db.org>
+  * Copyright (C) 2001 - 2011 Vivien Malerba <malerba@gnome-db.org>
+  * Copyright (C) 2002 - 2003 Gonzalo Paniagua Javier <gonzalo@src.gnome.org>

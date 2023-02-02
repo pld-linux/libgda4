@@ -15,7 +15,7 @@
 %ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664}
 %undefine	with_jdbc
 %endif
-%define vala_ver	0.24
+%define vala_ver	0.56
 
 Summary:	GNU Data Access library
 Summary(pl.UTF-8):	Biblioteka GNU Data Access
@@ -29,6 +29,13 @@ Source0:	https://download.gnome.org/sources/libgda/4.2/libgda-%{version}.tar.xz
 Patch0:		%{name}-configure.patch
 Patch1:		%{name}-gir.patch
 Patch2:		%{name}-graphviz.patch
+Patch3:		libgda-sqlite.patch
+Patch4:		libgda-mdb1.0.patch
+Patch5:		libgda-openssl.patch
+Patch6:		libgda-perl.patch
+Patch7:		libgda-encoding.patch
+Patch8:		libgda-java.patch
+Patch9:		libgda-vala.patch
 URL:		https://www.gnome-db.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
@@ -350,21 +357,32 @@ Narzędzia graficzne dla GDA.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
 
 %{__sed} -i -e 's/libvala-0.14 >= 0.14/libvala-%{vala_ver}/' configure.ac
+
+%{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' \
+	libgda-report/RML/trml2html/trml2html.py \
+	libgda-report/RML/trml2pdf/trml2pdf.py
 
 %build
 # included version is bash-specific, use system file
 cp -f %{_aclocaldir}/introspection.m4 m4/introspection.m4
-%if %{with jdbc}
-export JAVA_HOME="%{java_home}"
-%endif
 %{__gtkdocize}
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
 %{__automake}
+%if %{with jdbc}
+export JAVA_HOME="%{java_home}"
+%endif
 %configure \
 	--disable-default-binary \
 	--disable-silent-rules \

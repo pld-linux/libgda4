@@ -1,0 +1,107 @@
+--- libgda-4.2.13/providers/mdb/gda-mdb.h.orig	2023-02-01 17:08:02.566076308 +0100
++++ libgda-4.2.13/providers/mdb/gda-mdb.h	2023-02-01 17:08:57.269113289 +0100
+@@ -39,6 +39,7 @@ typedef struct {
+ 	GdaConnection  *cnc;
+ 	MdbHandle      *mdb;
+ 	gchar          *server_version;
++	gchar          *filename;
+ } MdbConnectionData;
+ 
+ #endif
+--- libgda-4.2.13/providers/mdb/gda-mdb-provider.c.orig	2023-02-01 17:08:02.569409623 +0100
++++ libgda-4.2.13/providers/mdb/gda-mdb-provider.c	2023-02-01 17:13:17.234371604 +0100
+@@ -63,8 +63,6 @@ static const gchar *gda_mdb_provider_get
+ 
+ 
+ static GObjectClass *parent_class = NULL;
+-static GStaticMutex mdb_init_mutex = G_STATIC_MUTEX_INIT;
+-static gint loaded_providers = 0;
+ char *g_input_ptr;
+ 
+ /* 
+@@ -93,7 +93,6 @@ gda_mdb_provider_class_init (GdaMdbProvi
+ static void
+ gda_mdb_provider_init (GdaMdbProvider *myprv, GdaMdbProviderClass *klass)
+ {
+-	mdb_set_date_fmt ("%Y-%m-%d %H:%M:%S");
+ }
+ 
+ static void
+@@ -107,13 +104,6 @@ gda_mdb_provider_finalize (GObject *obje
+ 
+ 	/* chain to parent class */
+ 	parent_class->finalize (object);
+-
+-	/* call MDB exit function if there are no more providers */
+-	g_static_mutex_lock (&mdb_init_mutex);
+-	loaded_providers--;
+-	if (loaded_providers == 0)
+-		mdb_exit ();
+-	g_static_mutex_unlock (&mdb_init_mutex);
+ }
+ 
+ GType
+@@ -148,12 +138,6 @@ gda_mdb_provider_new (void)
+ {
+ 	GdaMdbProvider *provider;
+ 
+-	g_static_mutex_lock (&mdb_init_mutex);
+-	if (loaded_providers == 0) 
+-		mdb_init ();
+-	loaded_providers++;
+-	g_static_mutex_unlock (&mdb_init_mutex);
+-
+ 	provider = g_object_new (gda_mdb_provider_get_type (), NULL);
+ 	return GDA_SERVER_PROVIDER (provider);
+ }
+@@ -304,6 +288,7 @@ gda_mdb_provider_open_connection (GdaSer
+ 	cdata = g_new0 (MdbConnectionData, 1);
+ 	cdata->cnc = cnc;
+ 	cdata->server_version = NULL;
++	cdata->filename = filename;
+ #ifdef MDB_WITH_WRITE_SUPPORT
+ 	cdata->mdb = mdb_open (filename, MDB_WRITABLE);
+ #else
+@@ -316,6 +299,7 @@ gda_mdb_provider_open_connection (GdaSer
+ 		gda_mdb_free_cnc_data (cdata);
+ 		return FALSE;
+ 	}
++	mdb_set_date_fmt (cdata->mdb, "%Y-%m-%d %H:%M:%S");
+ 
+ 	/* open virtual connection */
+         if (! GDA_SERVER_PROVIDER_CLASS (parent_class)->open_connection (GDA_SERVER_PROVIDER (provider), cnc, params,
+@@ -416,8 +402,7 @@ table_create_columns_func (LocalSpec *sp
+ 		gda_column_set_name (gda_col, tmp);
+ 		g_free (tmp);
+ 		gda_column_set_g_type (gda_col, gda_mdb_type_to_gda (mdb_col->col_type));
+-		tmp = sanitize_name (g_strdup (mdb_get_coltype_string (spec->cdata->mdb->default_backend, 
+-								       mdb_col->col_type)));
++		tmp = sanitize_name (g_strdup (mdb_get_colbacktype_string (mdb_col)));
+ 		gda_column_set_dbms_type (gda_col, tmp);
+ 		g_free (tmp);
+ 		columns = g_list_prepend (columns, gda_col);
+@@ -474,7 +459,7 @@ table_create_model_func (LocalSpec *spec
+ 		gda_column_set_name (gda_col, tmp);
+ 		gda_column_set_description (gda_col, tmp);
+ 		g_free (tmp);
+-		tmp = sanitize_name (g_strdup (mdb_get_coltype_string (spec->cdata->mdb->default_backend, mdb_col->col_type)));
++		tmp = sanitize_name (g_strdup (mdb_get_colbacktype_string (mdb_col)));
+ 		gda_column_set_dbms_type (gda_col, tmp);
+ 		g_free (tmp);
+                 gda_column_set_g_type (gda_col, coltypes [c]);
+@@ -567,7 +552,7 @@ gda_mdb_provider_get_database (GdaServer
+ 	if (!cdata)
+ 		return NULL;
+ 
+-	return (const gchar *) cdata->mdb->f->filename;
++	return (const gchar *) cdata->filename;
+ }
+ 
+ /*
+@@ -577,5 +562,6 @@ static void
+ gda_mdb_free_cnc_data (MdbConnectionData *cdata)
+ {
+ 	g_free (cdata->server_version);
++	g_free (cdata->filename);
+ 	g_free (cdata);
+ }

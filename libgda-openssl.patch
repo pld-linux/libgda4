@@ -1,0 +1,34 @@
+--- libgda-4.2.13/providers/sqlcipher/sqlite3.c.orig	2012-04-27 17:42:37.000000000 +0200
++++ libgda-4.2.13/providers/sqlcipher/sqlite3.c	2023-02-01 18:03:04.868186203 +0100
+@@ -11961,7 +11961,7 @@ static int codec_key_derive(codec_ctx *c
+  * out - pouter to output bytes
+  */
+ static int codec_cipher(cipher_ctx *ctx, Pgno pgno, int mode, int size, unsigned char *in, unsigned char *out) {
+-  EVP_CIPHER_CTX ectx;
++  EVP_CIPHER_CTX *ectx = EVP_CIPHER_CTX_new();
+   unsigned char *iv;
+   int tmp_csz, csz;
+ 
+@@ -11983,15 +11983,16 @@ static int codec_cipher(cipher_ctx *ctx,
+     memcpy(iv, in+size, ctx->iv_sz);
+   } 
+   
+-  EVP_CipherInit(&ectx, ctx->evp_cipher, NULL, NULL, mode);
+-  EVP_CIPHER_CTX_set_padding(&ectx, 0);
+-  EVP_CipherInit(&ectx, NULL, ctx->key, iv, mode);
+-  EVP_CipherUpdate(&ectx, out, &tmp_csz, in, size);
++  EVP_CipherInit(ectx, ctx->evp_cipher, NULL, NULL, mode);
++  EVP_CIPHER_CTX_set_padding(ectx, 0);
++  EVP_CipherInit(ectx, NULL, ctx->key, iv, mode);
++  EVP_CipherUpdate(ectx, out, &tmp_csz, in, size);
+   csz = tmp_csz;  
+   out += tmp_csz;
+-  EVP_CipherFinal(&ectx, out, &tmp_csz);
++  EVP_CipherFinal(ectx, out, &tmp_csz);
+   csz += tmp_csz;
+-  EVP_CIPHER_CTX_cleanup(&ectx);
++  EVP_CIPHER_CTX_cleanup(ectx);
++  EVP_CIPHER_CTX_free(ectx);
+   assert(size == csz);
+ 
+   return SQLITE_OK;

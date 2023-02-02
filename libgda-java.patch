@@ -1,0 +1,26 @@
+--- libgda-4.2.13/m4/java.m4.orig	2012-04-27 17:34:23.000000000 +0200
++++ libgda-4.2.13/m4/java.m4	2023-02-01 21:16:29.291986310 +0100
+@@ -165,9 +165,9 @@ m4_define([_JAVA_CHECK_INTERNAL],
+ 		    JTYPE="Sun JRE 1.5"
+ 		    JFLAGS="-Xlint:unchecked -Xlint:deprecation"
+ 		    ;;
+-                JRE1.6.*)
++                JRE1.[[6789]].*|JRE1[[0123456789]].*)
+ 		    try_java=true
+-		    JTYPE="Sun JRE 1.6"
++		    JTYPE="Sun JRE 1.6+"
+ 		    JFLAGS="-Xlint:unchecked -Xlint:deprecation"
+ 		    ;;
+                 JREgcj-4*)
+@@ -209,8 +209,10 @@ m4_define([_JAVA_CHECK_INTERNAL],
+ 	                    ;;
+ 	                *)
+ 	                    RUN_JAVA(JAVA_LIBS, [-classpath ${srcdir} getsp -libs])
+-	                    JAVA_LIBS="${JAVA_LIBS} -ljvm"
+ 	           	    RUN_JAVA(JAVA_LD_PATH, [-classpath ${srcdir} getsp java.library.path])
++	                    RUN_JAVA(JAVA_BOOT_PATH, [-classpath ${srcdir} getsp sun.boot.library.path])
++	                    JAVA_LIBS="${JAVA_LIBS} -L${JAVA_BOOT_PATH} -L${JAVA_BOOT_PATH}/client -L${JAVA_BOOT_PATH}/server"
++	                    JAVA_LIBS="${JAVA_LIBS} -ljvm"
+ 	           	    ;;
+ 	            esac
+ 	            # note that we actually don't test JAVA_LIBS - we hope that the detection
